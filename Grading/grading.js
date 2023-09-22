@@ -14,3 +14,5 @@ function getGrade (mark){
         return "E";
     }
 }
+//Exporting get grade so it can be used in other files.
+module.exports= getGrade;

@@ -26,7 +26,7 @@ const NHIFrates= [
     {MaxS:79999,deduction:1400},
     {MaxS:89999,deduction:1500},
     {MaxS:99999,deduction:1600},
-    {MaxS:Infinity,deduction:11700},
+    {MaxS:Infinity,deduction:1700},
 ];
 
 
@@ -37,10 +37,11 @@ function calculateTax (GrossSalary){
     for (i=0;i<TaxRates.length; i++ ) {
         let {MaxS,rate}=TaxRates[i]  //fetching MaxS and rate for TaxRates array.
         if (GrossSalary<MaxS){
-            tax = GrossSalary*rate;   // Calculating tax.
-        } else if (MaxS=GrossSalary){
-            tax = MaxS*rate;          // Calculating tax.
-            break;
+            tax += GrossSalary*rate;
+            break;                       // Calculating tax.
+        } else if (GrossSalary>=MaxS){
+            tax += MaxS*rate;
+            GrossSalary -= MaxS          // Calculating tax.
         }
     return tax;
     }  
@@ -55,10 +56,12 @@ function calculateNHIF (GrossSalary){
             Deduc=deduction;        //Calculating deduction.
             break;
         }
-    return Deduc;
     }
+    return Deduc;
 };
-
+let BasicSalary;
+let Pension;
+let Benefits;
 // function for calculating Net income.
 function netIncome(BasicSalary,Pension,Benefits){
     const grossSalary = BasicSalary + Benefits;
@@ -66,15 +69,18 @@ function netIncome(BasicSalary,Pension,Benefits){
     const NssfDeduction= Pension;
     const tax = calculateTax(grossSalary);
     const NetSalary = grossSalary- NhifDeduction- NssfDeduction -tax;
-    console.log(`Gross income: ${grossSalary}`);
-    console.log(`NHIF Deduction: ${NhifDeduction}`);
-    console.log(`NSSF Deduction: ${NssfDeduction}`);
-    console.log(`Tax: ${tax}`);
-    console.log(`Net Income: ${NetSalary}`);
+    return {                  //returning all calculation done in the function.
+        grossSalary,
+        NhifDeduction,
+        NssfDeduction,
+        tax,
+        NetSalary
+    }
 };
+// Exporting functions and arrays.
+module.exports = {calculateNHIF,calculateTax,netIncome,NHIFrates,TaxRates};
 
-module.exports = calculateTax;
-module.exports = calculateNHIF;
-module.exports = netIncome;
+
+
 
 

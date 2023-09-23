@@ -59,4 +59,20 @@ function calculateNHIF (GrossSalary){
     }
 };
 
+// function for calculating Net income.
+function netIncome(BasicSalary,Pension,Benefits){
+    const grossSalary = BasicSalary + Benefits;
+    const NhifDeduction= NHIFrates(grossSalary);
+    const NssfDeduction= Pension;
+    const tax = calculateTax(grossSalary);
+    const NetSalary = grossSalary- NhifDeduction- NssfDeduction -tax;
+    return {                  //returning all calculation done in the function.
+        grossSalary,
+        NhifDeduction,
+        NssfDeduction,
+        tax,
+        NetSalary
+    }
+};
+
 

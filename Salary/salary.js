@@ -46,5 +46,17 @@ function calculateTax (GrossSalary){
     }  
 };
 
+//Function for calculating NHIF deductions.
+function calculateNHIF (GrossSalary){
+    let Deduc = 0;  // let deduction = 0
+    for (i=0, i<NHIFrates.length, i++){
+        const{MaxS,deduction} = NHIFrates[i];  //Fetching MaxS and deduction for NHIFrates array.
+        if (GrossSalary<=MaxS){
+            Deduc=deduction;        //Calculating deduction.
+            break;
+        }
+    return Deduc;
+    }
+};
 
 

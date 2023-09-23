@@ -14,3 +14,5 @@ function getPoints(speed){
         }
     }
 };
+//Exporting function.
+module.exports=getPoints;

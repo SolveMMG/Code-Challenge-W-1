@@ -34,8 +34,8 @@ const NHIFrates= [
 //Function for calculating tax.
 function calculateTax (GrossSalary){
     let tax = 0  //setting tax to 0
-    for (i=0,i<TaxRates.length, i++ ) {
-        const {MaxS,rate}=TaxRates[i]  //fetching MaxS and rate for TaxRates array.
+    for (i=0;i<TaxRates.length; i++ ) {
+        let {MaxS,rate}=TaxRates[i]  //fetching MaxS and rate for TaxRates array.
         if (GrossSalary<MaxS){
             tax = GrossSalary*rate;   // Calculating tax.
         } else if (MaxS=GrossSalary){
@@ -49,8 +49,8 @@ function calculateTax (GrossSalary){
 //Function for calculating NHIF deductions.
 function calculateNHIF (GrossSalary){
     let Deduc = 0;  // let deduction = 0
-    for (i=0, i<NHIFrates.length, i++){
-        const{MaxS,deduction} = NHIFrates[i];  //Fetching MaxS and deduction for NHIFrates array.
+    for (i=0; i<NHIFrates.length; i++){
+        let {MaxS,deduction} = NHIFrates[i];  //Fetching MaxS and deduction for NHIFrates array.
         if (GrossSalary<=MaxS){
             Deduc=deduction;        //Calculating deduction.
             break;
@@ -62,17 +62,19 @@ function calculateNHIF (GrossSalary){
 // function for calculating Net income.
 function netIncome(BasicSalary,Pension,Benefits){
     const grossSalary = BasicSalary + Benefits;
-    const NhifDeduction= NHIFrates(grossSalary);
+    const NhifDeduction= calculateNHIF(grossSalary);
     const NssfDeduction= Pension;
     const tax = calculateTax(grossSalary);
     const NetSalary = grossSalary- NhifDeduction- NssfDeduction -tax;
-    return {                  //returning all calculation done in the function.
-        grossSalary,
-        NhifDeduction,
-        NssfDeduction,
-        tax,
-        NetSalary
-    }
+    console.log(`Gross income: ${grossSalary}`);
+    console.log(`NHIF Deduction: ${NhifDeduction}`);
+    console.log(`NSSF Deduction: ${NssfDeduction}`);
+    console.log(`Tax: ${tax}`);
+    console.log(`Net Income: ${NetSalary}`);
 };
+
+module.exports = calculateTax;
+module.exports = calculateNHIF;
+module.exports = netIncome;
 
 

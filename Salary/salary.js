@@ -31,6 +31,20 @@ const NHIFrates= [
 
 
 
+//Function for calculating tax.
+function calculateTax (GrossSalary){
+    let tax = 0  //setting tax to 0
+    for (i=0,i<TaxRates.length, i++ ) {
+        const {MaxS,rate}=TaxRates[i]  //fetching MaxS and rate for TaxRates array.
+        if (GrossSalary<MaxS){
+            tax = GrossSalary*rate;   // Calculating tax.
+        } else if (MaxS=GrossSalary){
+            tax = MaxS*rate;          // Calculating tax.
+            break;
+        }
+    return tax;
+    }  
+};
 
 
 

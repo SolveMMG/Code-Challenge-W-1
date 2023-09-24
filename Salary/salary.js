@@ -71,15 +71,14 @@ function calculateNSSF(GrossSalary){
     if (GrossSalary<=LEL){
         Deduc= Math.min(tier1,GrossSalary * 0.06)
     }else if (GrossSalary>LEL && GrossSalary<=UEL && GrossSalary>UEL){
-        Deduc=Math.min(tier2,GrossSalary * 0.06)
+        Deduc=Math.min(tier2,GrossSalary * 0.06)                       //Calcualting NSSF deduction.
     }
     return Deduc;
 }
 let BasicSalary;
-let Pension;
 let Benefits;
 // function for calculating Net income.
-function netIncome(BasicSalary,Pension,Benefits){
+function netIncome(BasicSalary,Benefits){
     const grossSalary = BasicSalary + Benefits;
     const NhifDeduction= calculateNHIF(grossSalary);
     const NssfDeduction= calculateNSSF(grossSalary);

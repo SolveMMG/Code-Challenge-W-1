@@ -39,12 +39,12 @@ function calculateTax (GrossSalary){
         if (GrossSalary<MaxS){
             tax += GrossSalary*rate;
             break;                       // Calculating tax.
-        } else if (GrossSalary>=MaxS){
+        } else{
             tax += MaxS*rate;
             GrossSalary -= MaxS          // Calculating tax.
         }
-    return tax;
     }  
+    return tax;
 };
 
 //Function for calculating NHIF deductions.

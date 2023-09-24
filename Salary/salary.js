@@ -70,8 +70,10 @@ function calculateNSSF(GrossSalary){
 
     if (GrossSalary<=LEL){
         Deduc= Math.min(tier1,GrossSalary * 0.06)
-    }else if (GrossSalary>LEL && GrossSalary<=UEL && GrossSalary>UEL){
+    }else if (GrossSalary>LEL && GrossSalary<=UEL){
         Deduc=Math.min(tier2,GrossSalary * 0.06)                       //Calcualting NSSF deduction.
+    }else if (GrossSalary>UEL){
+        Deduc = tier2;
     }
     return Deduc;
 }

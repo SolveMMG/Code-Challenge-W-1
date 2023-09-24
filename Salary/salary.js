@@ -59,6 +59,22 @@ function calculateNHIF (GrossSalary){
     }
     return Deduc;
 };
+
+//Function for calculating NSSF deduction.
+function calculateNSSF(GrossSalary){
+    let Deduc =0;
+    const LEL = 6000;      // Lower Earning Limit
+    const UEL = 18000;     //Upper Earning LImit
+    const tier1 = 360;
+    const tier2 =720;
+
+    if (GrossSalary<=LEL){
+        Deduc= Math.min(tier1,GrossSalary * 0.06)
+    }else if (GrossSalary>LEL && GrossSalary<=UEL && GrossSalary>UEL){
+        Deduc=Math.min(tier2,GrossSalary * 0.06)
+    }
+    return Deduc;
+}
 let BasicSalary;
 let Pension;
 let Benefits;
@@ -66,7 +82,7 @@ let Benefits;
 function netIncome(BasicSalary,Pension,Benefits){
     const grossSalary = BasicSalary + Benefits;
     const NhifDeduction= calculateNHIF(grossSalary);
-    const NssfDeduction= Pension;
+    const NssfDeduction= calculateNSSF(grossSalary);
     const tax = calculateTax(grossSalary);
     const NetSalary = grossSalary- NhifDeduction- NssfDeduction -tax;
     return {                  //returning all calculation done in the function.
@@ -78,7 +94,7 @@ function netIncome(BasicSalary,Pension,Benefits){
     }
 };
 // Exporting functions and arrays.
-module.exports = {calculateNHIF,calculateTax,netIncome,NHIFrates,TaxRates};
+module.exports = {calculateNHIF,calculateTax,netIncome,calculateNSSF,NHIFrates,TaxRates};
 
 
 

@@ -94,7 +94,7 @@ function netIncome(BasicSalary,Pension,Benefits){
     }
 };
 // Exporting functions and arrays.
-module.exports = {calculateNHIF,calculateTax,netIncome,calculateNSSF,NHIFrates,TaxRates};
+module.exports = {calculateNHIF,calculateTax,calculateNSSF,netIncome,NHIFrates,TaxRates};
 
 
 
